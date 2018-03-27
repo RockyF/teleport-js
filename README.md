@@ -9,7 +9,7 @@ codec: 'p' (protobuf)
 ```
 
 # Usage
-```
+```javascript
 import {dail, addProtoSource} from 'teleport-js'
 
 await addProtoSource('lobby', lobbyProto);
