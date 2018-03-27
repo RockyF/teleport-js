@@ -3,7 +3,6 @@
  */
 
 import {pack, unpackHeader, unpackBody} from './protocol'
-import {addProtoSource, addProtoFilePath} from './protobuf'
 import EventEmitter from 'events'
 
 let seq = 0;
@@ -13,7 +12,7 @@ export const events = {
 	CLOSE: 'close',
 };
 
-class Session extends EventEmitter {
+export class Session extends EventEmitter {
 	constructor() {
 		super();
 
@@ -108,12 +107,3 @@ class Session extends EventEmitter {
 		}));
 	}
 }
-
-export default function dial(url) {
-	let session = new Session();
-	session.connect(url);
-	return session;
-}
-
-exports.addProtoSource = addProtoSource;
-exports.addProtoFilePath = addProtoFilePath;

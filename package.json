@@ -2,7 +2,7 @@
   "name": "teleport-js",
   "version": "1.0.0",
   "description": "js client library for henrylee2cn/teleport",
-  "main": "src/teleport.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
