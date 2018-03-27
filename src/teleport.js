@@ -3,6 +3,7 @@
  */
 
 import {pack, unpackHeader, unpackBody} from './protocol'
+import {addProtoSource, addProtoFilePath} from './protobuf'
 import EventEmitter from 'events'
 
 let seq = 0;
@@ -113,3 +114,6 @@ export default function dial(url) {
 	session.connect(url);
 	return session;
 }
+
+exports.addProtoSource = addProtoSource;
+exports.addProtoFilePath = addProtoFilePath;
