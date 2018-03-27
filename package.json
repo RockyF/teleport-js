@@ -1,0 +1,29 @@
+{
+  "name": "teleport-js",
+  "version": "1.0.0",
+  "description": "js client library for henrylee2cn/teleport",
+  "main": "src/teleport.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RockyF/teleport-js.git"
+  },
+  "keywords": [
+    "teleport",
+    "js",
+    "client"
+  ],
+  "author": "rockyf",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RockyF/teleport-js/issues"
+  },
+  "homepage": "https://github.com/RockyF/teleport-js#readme",
+  "dependencies": {
+    "bytebuffer": "^5.0.1",
+    "protobufjs": "^6.8.6",
+    "query-string": "^6.0.0"
+  }
+}
