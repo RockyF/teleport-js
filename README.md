@@ -5,7 +5,7 @@ codec: 'p' (protobuf)
 
 # Install
 ```
-	npm i -S teleport-js
+npm i -S @rockyf/teleport-js
 ```
 
 # Usage
@@ -23,5 +23,8 @@ session.on(events.CONNECT, async () => {
 	if (response) {
 		this.user = DataCenter.user = response.userInfo;
 	}
+});
+session.on('/core/kickout', 'lobby.KickOutNotify', (args) => {
+	console.log(args);
 });
 ```
