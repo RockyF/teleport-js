@@ -10,6 +10,7 @@ let seq = 0;
 export const events = {
 	CONNECT: 'connect',
 	CLOSE: 'close',
+	ERROR: 'error',
 };
 
 export class Session extends EventEmitter {
@@ -31,6 +32,12 @@ export class Session extends EventEmitter {
 		this.connected = false;
 
 		this.emit(events.CLOSE);
+	};
+
+	_onError(event) {
+		this.connected = false;
+
+		this.emit(events.ERROR);
 	};
 
 	_onMessage(event) {
@@ -81,6 +88,7 @@ export class Session extends EventEmitter {
 		socket.onopen = this._onConnect.bind(this);
 		socket.onmessage = this._onMessage.bind(this);
 		socket.onclose = this._onClose.bind(this);
+		socket.onerror = this._onError.bind(this);
 	}
 
 	on(event, pName, listener = null) {
