@@ -8,20 +8,25 @@ let protoCache = {};
 let protoRootMap = {};
 
 export function getProto(name) {
-	let proto = protoCache[name];
-	let temp;
-	if (!proto) {
-		let arr = name.split('.');
-		temp = protoRootMap[arr[0]].lookup(name);
-		if (temp) {
-			proto = protoCache[name] = temp;
+	if(name){
+		let proto = protoCache[name];
+		let temp;
+		if (!proto) {
+			let arr = name.split('.');
+			let ns = arr[0];
+			temp = protoRootMap[ns].lookup(name);
+			if (temp) {
+				proto = protoCache[name] = temp;
+			}
 		}
+		if (!proto && !temp) {
+			//logger.warn(`proto message is not exist (${name})`);
+			return null;
+		}
+		return proto;
+	}else {
+		return null
 	}
-	if (!proto && !temp) {
-		//logger.warn(`proto message is not exist (${name})`);
-		return null;
-	}
-	return proto;
 }
 
 export function getAllTypes() {

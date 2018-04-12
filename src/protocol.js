@@ -4,6 +4,7 @@
 
 import ByteBuffer from 'bytebuffer'
 import {marshal, unmarshal} from './protobuf'
+import qs from 'query-string'
 
 const queryString = require('query-string');
 
@@ -16,7 +17,9 @@ export function pack(url, name, data, seq) {
 	// transfer pipe
 	buffer.writeByte(0);
 	// seq
-	buffer.writeUint64(seq);
+	let s = seq + '';
+	buffer.writeUint32(s.length);
+	buffer.writeString(s);
 	// pType
 	buffer.writeByte(1);
 	// uri
@@ -41,9 +44,9 @@ export function unpackHeader(bytes) {
 	let size = buffer.readUint32();
 	let pVersion = buffer.readByte();
 	let pipeSize = buffer.readByte();
-	let seq = buffer.readUint64();
+	let seq = buffer.readUTF8String(buffer.readUint32());
 	let pType = buffer.readByte();
-	let uri = buffer.readUTF8String(buffer.readUint32());
+	let url = buffer.readUTF8String(buffer.readUint32());
 	let meta = buffer.readUTF8String(buffer.readUint32());
 	let codec = buffer.readByte();
 
@@ -55,6 +58,8 @@ export function unpackHeader(bytes) {
 			meta['X-Reply-Error'] = JSON.parse(meta['X-Reply-Error']);
 		}
 	}
+
+	let uri = qs.parseUrl(url);
 
 	return {
 		uri,

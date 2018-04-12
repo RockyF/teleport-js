@@ -72,10 +72,14 @@ export class Session extends EventEmitter {
 				}
 				break;
 			case 3: //push
-				let router = this.routerMap[uri];
+				let router = this.routerMap[uri.url];
 				if (router) {
 					data = unpackBody(bodyBytes, router.pName);
-					this.emit(uri, data);
+					if(uri.query){
+						data = data || {};
+						data.query = uri.query;
+					}
+					this.emit(uri.url, data);
 				}
 				break;
 		}

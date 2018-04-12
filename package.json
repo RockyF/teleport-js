@@ -1,6 +1,6 @@
 {
   "name": "@rockyf/teleport-js",
-  "version": "1.0.2",
+  "version": "1.0.9",
   "description": "js client library for henrylee2cn/teleport",
   "main": "src/index.js",
   "scripts": {
