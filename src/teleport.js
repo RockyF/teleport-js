@@ -51,7 +51,7 @@ export class Session extends EventEmitter {
 			bodyBytes,
 		} = unpackHeader(event.data);
 
-		let data;
+		let body;
 		switch (pType) {
 			case 0: //default
 
@@ -67,19 +67,15 @@ export class Session extends EventEmitter {
 					reject(error)
 				} else {
 					let repName = name + 'Rep';
-					data = unpackBody(bodyBytes, repName);
-					resolve(data);
+					body = unpackBody(bodyBytes, repName);
+					resolve(body);
 				}
 				break;
 			case 3: //push
 				let router = this.routerMap[uri.url];
 				if (router) {
-					data = unpackBody(bodyBytes, router.pName);
-					if(uri.query){
-						data = data || {};
-						data.query = uri.query;
-					}
-					this.emit(uri.url, data);
+					body = unpackBody(bodyBytes, router.pName);
+					this.emit(uri.url, {body, uri});
 				}
 				break;
 		}
