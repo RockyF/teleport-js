@@ -2,11 +2,10 @@
  * Created by rockyl on 2018/2/28.
  */
 
-import ByteBuffer from 'bytebuffer'
 import {marshal, unmarshal} from './protobuf'
-import qs from 'query-string'
-
-const queryString = require('query-string');
+import queryString from 'query-string'
+//import ByteBuffer from 'bytebuffer'
+const ByteBuffer = dcodeIO.ByteBuffer;
 
 export function pack(url, name, data, seq) {
 	let buffer = new ByteBuffer();
@@ -59,7 +58,7 @@ export function unpackHeader(bytes) {
 		}
 	}
 
-	let uri = qs.parseUrl(url);
+	let uri = queryString.parseUrl(url);
 
 	return {
 		uri,

@@ -2,7 +2,7 @@
  * Created by rockyl on 2018/2/21.
  */
 
-import protobuf from "protobufjs"
+//import protobuf from "protobufjs"
 
 let protoCache = {};
 let protoRootMap = {};
