@@ -15,9 +15,7 @@ export default {
 	},
 	plugins: [
 		node_builtins(),
-		commonjs({
-			//exclude: ['node_modules/bytebuffer/**', 'node_modules/protobufjs/**', 'node_modules/query-string/**'],
-		}),
+		commonjs(),
 		babel(),
 		node_resolve(),
 	],
