@@ -3,7 +3,7 @@
  */
 
 import {marshal, unmarshal} from './protobuf'
-import queryString from 'query-string'
+//import queryString from 'query-string'
 //import ByteBuffer from 'bytebuffer'
 const ByteBuffer = dcodeIO.ByteBuffer;
 
@@ -52,13 +52,13 @@ export function unpackHeader(bytes) {
 	let bodyBytes = new Uint8Array(buffer.toArrayBuffer());
 
 	if (meta.length > 0) {
-		meta = queryString.parse(meta);
+		meta = querystring.parse(meta);
 		if ('X-Reply-Error' in meta) {
 			meta['X-Reply-Error'] = JSON.parse(meta['X-Reply-Error']);
 		}
 	}
 
-	let uri = queryString.parseUrl(url);
+	let uri = querystring.parseUrl(url);
 
 	return {
 		uri,
