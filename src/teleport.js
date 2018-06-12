@@ -3,7 +3,7 @@
  */
 
 import {pack, unpackHeader, unpackBody} from './protocol'
-import EventEmitter from 'events'
+import {EventEmitter2} from 'eventemitter2'
 
 let seq = 0;
 
@@ -13,7 +13,7 @@ export const events = {
 	ERROR: 'error',
 };
 
-export class Session extends EventEmitter {
+export class Session extends EventEmitter2 {
 	constructor() {
 		super();
 
