@@ -101,15 +101,17 @@ export class Session extends EventEmitter {
 		}
 	}
 
-	request(path, name, data, resolve, reject) {
-		if (this.socket && this.connected) {
-			let result = name.match(/(.*?)Req$/i);
-			let reqName = name + (result ? '' : 'Req');
-			let bytes = pack(path, reqName, data, ++seq);
-			this.callbackHandlerMap[seq] = {name: result ? result[1] : name, resolve, reject};
-			this.socket.send(bytes);
-		} else {
-			reject();
-		}
+	request(path, name, data) {
+		return new Promise(((resolve, reject) => {
+			if (this.socket && this.connected) {
+				let result = name.match(/(.*?)Req$/i);
+				let reqName = name + (result ? '' : 'Req');
+				let bytes = pack(path, reqName, data, ++seq);
+				this.callbackHandlerMap[seq] = {name: result ? result[1] : name, resolve, reject};
+				this.socket.send(bytes);
+			} else {
+				reject();
+			}
+		}));
 	}
 }

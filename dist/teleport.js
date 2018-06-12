@@ -774,16 +774,20 @@
 			}
 		}, {
 			key: 'request',
-			value: function request(path, name, data, resolve, reject) {
-				if (this.socket && this.connected) {
-					var result = name.match(/(.*?)Req$/i);
-					var reqName = name + (result ? '' : 'Req');
-					var bytes = pack(path, reqName, data, ++seq);
-					this.callbackHandlerMap[seq] = { name: result ? result[1] : name, resolve: resolve, reject: reject };
-					this.socket.send(bytes);
-				} else {
-					reject();
-				}
+			value: function request(path, name, data) {
+				var _this2 = this;
+
+				return new Promise(function (resolve, reject) {
+					if (_this2.socket && _this2.connected) {
+						var result = name.match(/(.*?)Req$/i);
+						var reqName = name + (result ? '' : 'Req');
+						var bytes = pack(path, reqName, data, ++seq);
+						_this2.callbackHandlerMap[seq] = { name: result ? result[1] : name, resolve: resolve, reject: reject };
+						_this2.socket.send(bytes);
+					} else {
+						reject();
+					}
+				});
 			}
 		}]);
 		return Session;
